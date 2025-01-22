@@ -62,6 +62,7 @@ function UpcomingWebinars() {
           <HoverEffect
             items={featuredWebinars.map(webinar => (
               {
+                key: webinar.title,
                 title: webinar.title,
                 description: webinar.description,
                 link: '/'

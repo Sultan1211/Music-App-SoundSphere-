@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import React from 'react';
 import { motion } from "framer-motion";
-import { Spotlight } from './ui/Spotlight';
 import { Button } from "./ui/moving-border";
 import { AuroraBackground } from './ui/aurora-background';
 
