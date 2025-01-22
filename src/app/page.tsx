@@ -2,8 +2,8 @@ import FeaturedCourses from "@/components/FeaturedCourses";
 import HeroSection from "@/components/HeroSection";
 import MusicSchoolTestimonials from "@/components/TestimonialCards";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import Image from "next/image";
 import Instructors from "@/components/Instructors";
+import UpcomingWebinars from "@/components/UpcomingWebinars";
 import Footer from "@/components/Footer";
 
 export default function Home() {
