@@ -46,7 +46,7 @@ function FeaturedCourses() {
             </div>
             <div>
                 <Link href={"/courses"} className='mt-20 flex justify-center items-center'>
-                    <button className="px-4 py-2 rounded-md border border-neutral-300 bg-neutral-100 text-black text-sm hover:-translate-y-1 transform transition duration-200 hover:shadow-md">
+                    <button className="px-4 py-2 rounded-md border border-neutral-300 bg-customButton text-white font-semibold tracking-wide text-sm hover:-translate-y-1 transform transition duration-200 hover:shadow-md">
                         View All Courses
                     </button>
 
