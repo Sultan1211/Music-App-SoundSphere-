@@ -1,7 +1,6 @@
 "use client";
-
 import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 
 export const InfiniteMovingCards = ({
   items,
@@ -20,14 +19,40 @@ export const InfiniteMovingCards = ({
   pauseOnHover?: boolean;
   className?: string;
 }) => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const scrollerRef = React.useRef<HTMLUListElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
-    addAnimation();
-  }, []);
-  const [start, setStart] = useState(false);
-  function addAnimation() {
+  // useCallback hooks with dependencies added
+  const getDirection = useCallback(() => {
+    if (containerRef.current) {
+      if (direction === "left") {
+        containerRef.current.style.setProperty(
+          "--animation-direction",
+          "forwards"
+        );
+      } else {
+        containerRef.current.style.setProperty(
+          "--animation-direction",
+          "reverse"
+        );
+      }
+    }
+  }, [direction]);
+
+  const getSpeed = useCallback(() => {
+    if (containerRef.current) {
+      if (speed === "fast") {
+        containerRef.current.style.setProperty("--animation-duration", "20s");
+      } else if (speed === "normal") {
+        containerRef.current.style.setProperty("--animation-duration", "40s");
+      } else {
+        containerRef.current.style.setProperty("--animation-duration", "80s");
+      }
+    }
+  }, [speed]);
+
+  // Use useCallback to memoize the addAnimation function
+  const addAnimation = useCallback(() => {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
@@ -42,33 +67,14 @@ export const InfiniteMovingCards = ({
       getSpeed();
       setStart(true);
     }
-  }
-  const getDirection = () => {
-    if (containerRef.current) {
-      if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards"
-        );
-      } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse"
-        );
-      }
-    }
-  };
-  const getSpeed = () => {
-    if (containerRef.current) {
-      if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
-      } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
-      } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
-      }
-    }
-  };
+  }, [getDirection, getSpeed]); // Add getDirection and getSpeed as dependencies
+
+  const [start, setStart] = useState(false);
+
+  useEffect(() => {
+    addAnimation(); // Trigger the animation setup on component mount or when dependencies change
+  }, [addAnimation]);
+
   return (
     <div
       ref={containerRef}
@@ -85,12 +91,12 @@ export const InfiniteMovingCards = ({
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
-        {items.map((item, idx) => (
+        {items.map((item) => (
           <li
             className="w-[350px] max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-slate-700 px-8 py-6 md:w-[450px]"
             style={{
               background:
-                "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
+                "linear-gradient(180deg, var(--slate-800), var(--slate-900) ",
             }}
             key={item.name}
           >
