@@ -18,7 +18,6 @@
 - **Dynamic Animations:** Smooth transitions and engaging animations powered by **Framer Motion**.
 - **Optimized Performance:** Server-side rendering and SEO optimizations with **Next.js** for fast and responsive pages.
 - **Secure Authentication:** Sign up, login, and session management using **JWT**.
-- **Content Delivery:** Scalable and efficient backend using **Prisma** and **PostgreSQL**.
 - **Responsive Design:** Fully responsive and mobile-first design using **TailwindCSS**.
 
 ## 🛠️ Tech Stack & Tools:
@@ -31,10 +30,7 @@
   - Axios for making API requests.
   - TypeScript for type safety and enhanced development experience.
 
-- **Backend**: 
-  - Prisma ORM for seamless database interaction and management.
-  - PostgreSQL for reliable database storage.
-  - JWT-based authentication for secure user access.
+
 
 ## 💡 Project Description
 
